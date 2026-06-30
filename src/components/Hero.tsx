@@ -78,7 +78,7 @@ export function Hero() {
           </svg>
           DOWNLOAD_CV.PDF
           <span className="font-normal text-emerald-600/70 dark:text-emerald-400/60">
-            (150KB)
+            (780KB)
           </span>
         </a>
       </div>
