@@ -1,7 +1,10 @@
 import { Hero } from "@/components/Hero";
 import { BentoGrid } from "@/components/BentoGrid";
+import { EducationCard } from "@/components/EducationCard";
 import { LinearTimeline } from "@/components/LinearTimeline";
+import { FooterCta } from "@/components/FooterCta";
 import { jsonLd } from "@/data/jsonld";
+import { resumeData } from "@/data/resume";
 
 export default function Home() {
   return (
@@ -16,10 +19,12 @@ export default function Home() {
       <div className="mx-auto max-w-6xl space-y-20 px-4 py-12 md:py-24">
         <Hero />
         <BentoGrid />
+        <EducationCard />
         <LinearTimeline />
+        <FooterCta />
 
-        <footer className="flex flex-col items-center gap-1 pt-8 text-center font-mono text-[11px] text-neutral-400 dark:text-neutral-600">
-          <p>&copy; 2026 Christian Derek S. Amplayo</p>
+        <footer className="flex flex-col items-center gap-1 pt-4 text-center font-mono text-[11px] text-neutral-400 dark:text-neutral-600">
+          <p>&copy; 2026 {resumeData.contact.name}</p>
           <p>[ STACK: NEXTJS / TAILWIND V4 ]</p>
         </footer>
       </div>

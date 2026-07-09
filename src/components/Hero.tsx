@@ -2,12 +2,15 @@ import { resumeData } from "@/data/resume";
 import { StatusDot } from "@/components/ui/StatusDot";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
-const RESUME_FILE = "Resume_Christian_Derek_Amplayo.pdf";
-
 export function Hero() {
-  const { contact } = resumeData;
+  const { contact, summary, resumeFile } = resumeData;
   const rolePath = contact.title.toLowerCase().replace(/\s+/g, "-");
   const linkedInUrl = `https://${contact.linkedIn}`;
+  const githubUrl = contact.github
+    ? contact.github.startsWith("http")
+      ? contact.github
+      : `https://${contact.github}`
+    : null;
 
   return (
     <header className="flex flex-col gap-6">
@@ -28,6 +31,9 @@ export function Hero() {
         <p className="font-mono text-sm font-semibold text-emerald-600 dark:text-emerald-400">
           <span className="text-neutral-400 dark:text-neutral-600">~/</span>
           {rolePath}
+        </p>
+        <p className="max-w-2xl font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+          {summary}
         </p>
       </div>
 
@@ -50,6 +56,24 @@ export function Hero() {
           >
             {contact.linkedIn}
           </a>
+          {githubUrl ? (
+            <>
+              <span
+                aria-hidden="true"
+                className="text-neutral-300 dark:text-neutral-700"
+              >
+                /
+              </span>
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-emerald-600 dark:hover:text-emerald-400"
+              >
+                {contact.github}
+              </a>
+            </>
+          ) : null}
           <span aria-hidden="true" className="text-neutral-300 dark:text-neutral-700">
             /
           </span>
@@ -57,9 +81,9 @@ export function Hero() {
         </div>
 
         <a
-          href={`/${RESUME_FILE}`}
-          download={RESUME_FILE}
-          className="inline-flex w-fit items-center gap-2 rounded-lg border border-emerald-600/30 bg-emerald-500/10 px-4 py-2 font-mono text-xs font-semibold text-emerald-700 transition-colors hover:bg-emerald-500/20 dark:border-emerald-400/30 dark:text-emerald-300"
+          href={`/${resumeFile.filename}`}
+          download={resumeFile.filename}
+          className="inline-flex w-fit items-center gap-2 rounded-lg border border-emerald-600/30 bg-emerald-500/10 px-4 py-2.5 font-mono text-xs font-semibold text-emerald-700 transition-colors hover:bg-emerald-500/20 dark:border-emerald-400/30 dark:text-emerald-300"
         >
           <svg
             width="14"
@@ -78,7 +102,7 @@ export function Hero() {
           </svg>
           DOWNLOAD_CV.PDF
           <span className="font-normal text-emerald-600/70 dark:text-emerald-400/60">
-            (780KB)
+            ({resumeFile.sizeLabel})
           </span>
         </a>
       </div>

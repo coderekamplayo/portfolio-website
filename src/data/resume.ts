@@ -59,8 +59,15 @@ export interface Education {
   location: string;
 }
 
+export interface ResumeFile {
+  filename: string;
+  sizeLabel: string;
+}
+
 export interface ResumeData {
   contact: ContactInfo;
+  summary: string;
+  resumeFile: ResumeFile;
   experience: Experience[];
   academicExperience: AcademicExperience[];
   hackathons: Hackathon[];
@@ -77,6 +84,14 @@ export const resumeData: ResumeData = {
     phone: "09499881224",
     location: "Sta. Ana, City of Manila, Philippines",
     linkedIn: "linkedin.com/in/christian-derek-amplayo",
+  },
+
+  summary:
+    "Backend development and AI-integrated systems — Node.js/TypeScript and SAP ABAP.",
+
+  resumeFile: {
+    filename: "Resume_Christian_Derek_Amplayo.pdf",
+    sizeLabel: "780KB",
   },
 
   experience: [

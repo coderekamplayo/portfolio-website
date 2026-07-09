@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-import { SITE_URL } from "@/data/resume";
+import { SITE_URL, resumeData } from "@/data/resume";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,12 +14,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const title = "Christian Derek S. Amplayo | Software Engineer";
+const description =
+  "Software engineer focused on backend development and AI-integrated systems — Node.js/TypeScript, SAP ABAP, and system architecture. TOPCIT Level 3 certified.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Christian Derek S. Amplayo | Software Engineer",
-  description:
-    "Software engineer focused on production-grade Node.js/TypeScript backends, enterprise SAP ABAP, and system architecture. TOPCIT Level 3 certified.",
-  authors: [{ name: "Christian Derek S. Amplayo" }],
+  title,
+  description,
+  authors: [{ name: resumeData.contact.name }],
   keywords: [
     "Christian Derek Amplayo",
     "Software Engineer",
@@ -28,13 +31,23 @@ export const metadata: Metadata = {
     "SAP ABAP",
     "System Architecture",
     "Backend Developer",
+    "AI-integrated systems",
   ],
   openGraph: {
-    title: "Christian Derek S. Amplayo | Software Engineer",
-    description:
-      "Software engineer focused on production-grade Node.js/TypeScript backends, enterprise SAP ABAP, and system architecture.",
+    title,
+    description,
     url: SITE_URL,
+    siteName: resumeData.contact.name,
     type: "profile",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+  alternates: {
+    canonical: SITE_URL,
   },
 };
 
