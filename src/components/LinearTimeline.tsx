@@ -34,7 +34,7 @@ export function LinearTimeline() {
     <section id="timeline" aria-labelledby="timeline-heading" className="flex flex-col gap-8">
       <h2
         id="timeline-heading"
-        className="font-mono text-sm font-semibold uppercase tracking-[0.16em] text-foreground"
+        className="font-mono text-sm font-semibold uppercase tracking-[0.16em] text-accent"
       >
         EVENT LOG <span className="text-muted">{"//"}</span> EXPERIENCE
       </h2>
@@ -51,7 +51,7 @@ export function LinearTimeline() {
               <p className="font-mono text-[11px] tabular-nums text-muted">
                 [{event.dates}]
               </p>
-              <p className="font-mono text-xs font-semibold uppercase tracking-wider text-foreground">
+              <p className="font-mono text-xs font-semibold uppercase tracking-wider text-accent">
                 {event.category} <span className="text-muted">{"//"}</span>{" "}
                 {event.org}
               </p>

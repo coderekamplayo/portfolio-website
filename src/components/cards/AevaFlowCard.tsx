@@ -1,32 +1,121 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { resumeData, type AevaTab } from "@/data/resume";
+import { Fragment, useRef, useState } from "react";
+import {
+  resumeData,
+  type AevaRouteNode,
+  type AevaTab,
+} from "@/data/resume";
 import { Card } from "@/components/ui/Card";
 
 type TabId = AevaTab["id"];
 
-function RouteGraph({ route }: { route: string[] }) {
+const NODE_ICONS: Record<AevaRouteNode["id"], React.ReactNode> = {
+  caller: (
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+  ),
+  vapi: (
+    <>
+      <line x1="4" y1="10" x2="4" y2="14" />
+      <line x1="8" y1="7" x2="8" y2="17" />
+      <line x1="12" y1="4" x2="12" y2="20" />
+      <line x1="16" y1="7" x2="16" y2="17" />
+      <line x1="20" y1="10" x2="20" y2="14" />
+    </>
+  ),
+  handler: (
+    <>
+      <polyline points="16 18 22 12 16 6" />
+      <polyline points="8 6 2 12 8 18" />
+    </>
+  ),
+  cliniko: (
+    <>
+      <rect x="3" y="4" width="18" height="18" rx="2" />
+      <line x1="16" y1="2" x2="16" y2="6" />
+      <line x1="8" y1="2" x2="8" y2="6" />
+      <line x1="3" y1="10" x2="21" y2="10" />
+    </>
+  ),
+  postmark: (
+    <>
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="m22 7-10 5L2 7" />
+    </>
+  ),
+};
+
+function RouteGraph({
+  route,
+  caption,
+}: {
+  route: AevaRouteNode[];
+  caption: string;
+}) {
   return (
-    <div className="flex flex-col items-stretch gap-2 lg:flex-row lg:items-center">
-      {route.map((node, i) => (
-        <div
-          key={node}
-          className="flex flex-col items-center gap-2 lg:flex-1 lg:flex-row"
-        >
-          <div className="w-full rounded-md border border-border bg-panel-elevated px-3 py-2.5 text-center font-mono text-[11px] tracking-wider text-foreground">
-            {node}
-          </div>
-          {i < route.length - 1 ? (
-            <span
-              aria-hidden="true"
-              className="rotate-90 px-1 text-accent lg:rotate-0"
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col items-stretch lg:flex-row lg:items-stretch">
+        {route.map((node, i) => (
+          <Fragment key={node.id}>
+            <div
+              className={`flex flex-col items-center justify-center gap-1.5 rounded-md border px-4 py-3 text-center lg:min-w-32 ${
+                node.emphasis
+                  ? "border-accent/50 bg-panel-elevated"
+                  : "border-border bg-panel-elevated"
+              }`}
             >
-              &rarr;
-            </span>
-          ) : null}
-        </div>
-      ))}
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                className={node.emphasis ? "text-accent" : "text-muted"}
+              >
+                {NODE_ICONS[node.id]}
+              </svg>
+              <span className="font-mono text-[11px] tracking-wider text-foreground">
+                {node.title}
+              </span>
+              <span className="font-mono text-[9px] uppercase tracking-wider text-muted">
+                {node.subtitle}
+              </span>
+            </div>
+
+            {i < route.length - 1 ? (
+              <div aria-hidden="true" className="flex items-center justify-center">
+                {/* Horizontal dashed connector (desktop) */}
+                <div className="relative hidden h-full min-w-14 flex-1 items-center justify-center lg:flex">
+                  <span className="absolute inset-x-0 top-1/2 border-t border-dashed border-border" />
+                  {node.linkLabel ? (
+                    <span className="relative bg-panel px-1.5 font-mono text-[8px] tracking-[0.14em] text-accent">
+                      {node.linkLabel}
+                    </span>
+                  ) : null}
+                </div>
+                {/* Vertical dashed connector (mobile) */}
+                <div className="flex flex-col items-center gap-1 py-1.5 lg:hidden">
+                  <span className="h-3 border-l border-dashed border-border" />
+                  {node.linkLabel ? (
+                    <span className="font-mono text-[8px] tracking-[0.14em] text-accent">
+                      {node.linkLabel}
+                    </span>
+                  ) : null}
+                  <span className="h-3 border-l border-dashed border-border" />
+                </div>
+              </div>
+            ) : null}
+          </Fragment>
+        ))}
+      </div>
+
+      <p className="text-center font-mono text-[10px] tracking-[0.14em] text-muted">
+        {caption}
+      </p>
     </div>
   );
 }
@@ -107,7 +196,9 @@ export function AevaFlowCard({ className }: { className?: string }) {
             hidden={tab.id !== activeTab}
             className="flex flex-col gap-4"
           >
-            {tab.id === "flow" ? <RouteGraph route={aeva.route} /> : null}
+            {tab.id === "flow" ? (
+              <RouteGraph route={aeva.route} caption={aeva.routeCaption} />
+            ) : null}
             <ul className="flex flex-col gap-2">
               {tab.points.map((point) => (
                 <li

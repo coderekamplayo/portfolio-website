@@ -45,10 +45,21 @@ export interface AevaTab {
   points: string[];
 }
 
+export interface AevaRouteNode {
+  id: "caller" | "vapi" | "handler" | "cliniko" | "postmark";
+  title: string;
+  subtitle: string;
+  /** Small label rendered on the dashed connector to the next node. */
+  linkLabel?: string;
+  /** Visually emphasized node (the system this portfolio's work centers on). */
+  emphasis?: boolean;
+}
+
 export interface AevaContent {
   title: string;
   meta: string;
-  route: string[];
+  route: AevaRouteNode[];
+  routeCaption: string;
   tabs: AevaTab[];
 }
 
@@ -153,7 +164,40 @@ export const resumeData: ResumeData = {
   aeva: {
     title: "AEVA — AI-Powered Voice Agent Platform",
     meta: "Concisium / Independent Contractor / January 2026 – April 2026",
-    route: ["CALLER", "VAPI", "TOOL HANDLER", "CLINIKO", "POSTMARK / NOTIFICATION"],
+    route: [
+      {
+        id: "caller",
+        title: "CALLER",
+        subtitle: "Live phone call",
+        linkLabel: "AUDIO",
+      },
+      {
+        id: "vapi",
+        title: "VAPI",
+        subtitle: "Voice agent",
+        linkLabel: "TOOL CALL",
+      },
+      {
+        id: "handler",
+        title: "TOOL HANDLER",
+        subtitle: "Node.js / TypeScript",
+        linkLabel: "REST API",
+        emphasis: true,
+      },
+      {
+        id: "cliniko",
+        title: "CLINIKO",
+        subtitle: "PMS scheduling",
+        linkLabel: "CONFIRMATION",
+      },
+      {
+        id: "postmark",
+        title: "POSTMARK",
+        subtitle: "Notifications",
+      },
+    ],
+    routeCaption:
+      "LIVE CALL DATA · REAL-TIME TOOL EXECUTION — 9 BLUEPRINTS MIGRATED FROM MAKE.COM",
     tabs: [
       {
         id: "flow",
