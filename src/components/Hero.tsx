@@ -71,17 +71,30 @@ export function Hero() {
         </a>
       </div>
 
-      <ul
-        aria-label="Selected credentials and engagements"
-        className="flex flex-wrap items-center gap-x-6 gap-y-2 border-y border-border py-3 font-mono text-[11px] tracking-wider text-soft"
-      >
-        {hero.proofStrip.map((item) => (
-          <li key={item} className="flex items-center gap-2">
-            <span aria-hidden="true" className="h-1 w-1 rounded-full bg-accent" />
-            {item}
-          </li>
-        ))}
-      </ul>
+      <div className="proof-marquee overflow-hidden border-y border-border py-3">
+        <div className="proof-marquee-track">
+          {[false, true].map((duplicate) => (
+            <ul
+              key={String(duplicate)}
+              aria-label={
+                duplicate ? undefined : "Selected credentials and engagements"
+              }
+              aria-hidden={duplicate || undefined}
+              className="flex shrink-0 items-center gap-6 pr-6 font-mono text-[11px] tracking-wider text-soft"
+            >
+              {hero.proofStrip.map((item) => (
+                <li key={item} className="flex items-center gap-2 whitespace-nowrap">
+                  <span
+                    aria-hidden="true"
+                    className="h-1 w-1 rounded-full bg-accent"
+                  />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </div>
     </header>
   );
 }

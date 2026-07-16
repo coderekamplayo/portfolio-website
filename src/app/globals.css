@@ -91,6 +91,22 @@ body {
   outline-offset: 2px;
 }
 
+@keyframes proof-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.proof-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: proof-marquee 24s linear infinite;
+}
+
+.proof-marquee:hover .proof-marquee-track {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -99,5 +115,9 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .proof-marquee-track {
+    animation: none;
   }
 }
