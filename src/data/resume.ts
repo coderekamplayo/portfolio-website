@@ -8,6 +8,8 @@ export interface ContactInfo {
   location: string;
   linkedIn: string;
   github?: string;
+  /** Public path to a portrait image, e.g. "/profile.jpg". */
+  photo?: string;
 }
 
 export interface Experience {
@@ -118,6 +120,7 @@ export const resumeData: ResumeData = {
     phone: "09499881224",
     location: "Sta. Ana, City of Manila, Philippines",
     linkedIn: "linkedin.com/in/christian-derek-amplayo",
+    photo: "/profile.jpg",
   },
 
   summary:
