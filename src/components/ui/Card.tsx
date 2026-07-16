@@ -1,25 +1,77 @@
-interface CardProps {
-  children: React.ReactNode;
-  className?: string;
-  label?: string;
-}
+type CardStatus = "idle" | "active" | "verified";
 
-export function Card({ children, className, label }: CardProps) {
-  const base =
-    "relative rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-950/50 backdrop-blur-sm p-6 transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-700";
+type CardProps = {
+  label?: string;
+  title?: string;
+  meta?: string;
+  status?: CardStatus;
+  interactive?: boolean;
+  as?: "div" | "section" | "article";
+  className?: string;
+  children: React.ReactNode;
+};
+
+const STATUS_STYLES: Record<CardStatus, { text: string; className: string }> = {
+  idle: { text: "IDLE", className: "text-muted" },
+  active: { text: "ACTIVE", className: "text-accent" },
+  verified: { text: "VERIFIED", className: "text-accent" },
+};
+
+export function Card({
+  label,
+  title,
+  meta,
+  status,
+  interactive = false,
+  as: Tag = "div",
+  className,
+  children,
+}: CardProps) {
+  const statusStyle = status ? STATUS_STYLES[status] : null;
 
   return (
-    <div
-      className={[base, label ? "pt-10" : null, className]
+    <Tag
+      className={[
+        "group relative flex flex-col gap-4 rounded-card border border-border bg-panel p-6 transition-colors duration-200 hover:border-muted",
+        interactive ? "focus-within:border-accent" : null,
+        className,
+      ]
         .filter(Boolean)
         .join(" ")}
     >
-      {label ? (
-        <span className="absolute right-4 top-4 font-mono text-[10px] uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
-          {label}
-        </span>
+      {interactive ? (
+        <span
+          aria-hidden="true"
+          className="absolute inset-x-5 top-0 h-px bg-accent opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+        />
       ) : null}
+
+      {label || statusStyle ? (
+        <div className="flex items-center justify-between gap-4">
+          {label ? <span className="terminal-label">{label}</span> : null}
+          {statusStyle ? (
+            <span
+              className={`font-mono text-[10px] tracking-wider ${statusStyle.className}`}
+            >
+              <span aria-hidden="true">&#9679;&nbsp;</span>
+              {statusStyle.text}
+            </span>
+          ) : null}
+        </div>
+      ) : null}
+
+      {title || meta ? (
+        <div className="flex flex-col gap-1">
+          {title ? (
+            <h2 className="font-sans text-base font-semibold tracking-tight text-foreground">
+              {title}
+            </h2>
+          ) : null}
+          {meta ? <p className="font-mono text-[11px] text-muted">{meta}</p> : null}
+        </div>
+      ) : null}
+
       {children}
-    </div>
+    </Tag>
   );
 }

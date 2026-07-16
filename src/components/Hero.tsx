@@ -3,87 +3,39 @@ import { StatusDot } from "@/components/ui/StatusDot";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Hero() {
-  const { contact, summary, resumeFile } = resumeData;
-  const rolePath = contact.title.toLowerCase().replace(/\s+/g, "-");
+  const { contact, hero, resumeFile } = resumeData;
   const linkedInUrl = `https://${contact.linkedIn}`;
-  const githubUrl = contact.github
-    ? contact.github.startsWith("http")
-      ? contact.github
-      : `https://${contact.github}`
-    : null;
 
   return (
-    <header className="flex flex-col gap-6">
-      <div className="flex items-start justify-between gap-4">
-        <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 px-3 py-1 dark:border-neutral-800">
+    <header className="flex flex-col gap-8">
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="inline-flex items-center gap-2.5 rounded-md border border-border px-3 py-2">
           <StatusDot />
-          <span className="font-mono text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-            Status: Active / Open to Select Opportunities
-          </span>
+          <span className="terminal-label">{hero.availability}</span>
         </div>
         <ThemeToggle />
       </div>
 
-      <div className="flex flex-col gap-2">
-        <h1 className="font-sans text-3xl font-bold tracking-tight text-neutral-900 md:text-4xl dark:text-neutral-50">
-          {contact.name}
-        </h1>
-        <p className="font-mono text-sm font-semibold text-emerald-600 dark:text-emerald-400">
-          <span className="text-neutral-400 dark:text-neutral-600">~/</span>
-          {rolePath}
+      <div className="flex flex-col gap-4">
+        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+          {hero.overline}
         </p>
-        <p className="max-w-2xl font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-          {summary}
+        <h1 className="max-w-3xl font-sans text-3xl font-bold leading-tight tracking-tight text-foreground md:text-5xl">
+          {hero.heading}
+        </h1>
+        <p className="max-w-2xl font-sans text-sm leading-relaxed text-muted md:text-base">
+          {hero.supporting}
+        </p>
+        <p className="font-mono text-xs text-soft">
+          {contact.name} — {contact.location}
         </p>
       </div>
 
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-neutral-600 dark:text-neutral-400">
-          <a
-            href={`mailto:${contact.email}`}
-            className="transition-colors hover:text-emerald-600 dark:hover:text-emerald-400"
-          >
-            {contact.email}
-          </a>
-          <span aria-hidden="true" className="text-neutral-300 dark:text-neutral-700">
-            /
-          </span>
-          <a
-            href={linkedInUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors hover:text-emerald-600 dark:hover:text-emerald-400"
-          >
-            {contact.linkedIn}
-          </a>
-          {githubUrl ? (
-            <>
-              <span
-                aria-hidden="true"
-                className="text-neutral-300 dark:text-neutral-700"
-              >
-                /
-              </span>
-              <a
-                href={githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors hover:text-emerald-600 dark:hover:text-emerald-400"
-              >
-                {contact.github}
-              </a>
-            </>
-          ) : null}
-          <span aria-hidden="true" className="text-neutral-300 dark:text-neutral-700">
-            /
-          </span>
-          <span>{contact.location}</span>
-        </div>
-
+      <div className="flex flex-wrap items-center gap-3">
         <a
           href={`/${resumeFile.filename}`}
           download={resumeFile.filename}
-          className="inline-flex w-fit items-center gap-2 rounded-lg border border-emerald-600/30 bg-emerald-500/10 px-4 py-2.5 font-mono text-xs font-semibold text-emerald-700 transition-colors hover:bg-emerald-500/20 dark:border-emerald-400/30 dark:text-emerald-300"
+          className="inline-flex min-h-11 items-center gap-2 rounded-md bg-accent px-5 py-2.5 font-mono text-xs font-semibold text-[#09090b] transition-colors duration-150 hover:bg-selection"
         >
           <svg
             width="14"
@@ -100,12 +52,36 @@ export function Hero() {
             <polyline points="7 10 12 15 17 10" />
             <line x1="12" y1="15" x2="12" y2="3" />
           </svg>
-          DOWNLOAD_CV.PDF
-          <span className="font-normal text-emerald-600/70 dark:text-emerald-400/60">
-            ({resumeFile.sizeLabel})
-          </span>
+          DOWNLOAD RÉSUMÉ
+          <span className="font-normal opacity-70">({resumeFile.sizeLabel})</span>
+        </a>
+        <a
+          href={linkedInUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-11 items-center rounded-md border border-border px-5 py-2.5 font-mono text-xs text-foreground transition-colors duration-150 hover:border-muted hover:bg-panel-elevated"
+        >
+          LINKEDIN
+        </a>
+        <a
+          href={`mailto:${contact.email}`}
+          className="inline-flex min-h-11 items-center rounded-md border border-border px-5 py-2.5 font-mono text-xs text-foreground transition-colors duration-150 hover:border-muted hover:bg-panel-elevated"
+        >
+          EMAIL
         </a>
       </div>
+
+      <ul
+        aria-label="Selected credentials and engagements"
+        className="flex flex-wrap items-center gap-x-6 gap-y-2 border-y border-border py-3 font-mono text-[11px] tracking-wider text-soft"
+      >
+        {hero.proofStrip.map((item) => (
+          <li key={item} className="flex items-center gap-2">
+            <span aria-hidden="true" className="h-1 w-1 rounded-full bg-accent" />
+            {item}
+          </li>
+        ))}
+      </ul>
     </header>
   );
 }

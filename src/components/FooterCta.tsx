@@ -8,40 +8,39 @@ export function FooterCta() {
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className="flex flex-col items-center gap-4 border-t border-neutral-200 pt-10 dark:border-neutral-800"
+      className="flex flex-col items-center gap-4 border-t border-border pt-10"
     >
-      <h2
-        id="contact-heading"
-        className="font-mono text-[11px] uppercase tracking-wider text-neutral-400 dark:text-neutral-500"
-      >
-        /next-step
+      <h2 id="contact-heading" className="terminal-label">
+        STATUS // NEXT STEP
       </h2>
-      <p className="max-w-md text-center font-sans text-sm text-neutral-600 dark:text-neutral-400">
-        Open to select opportunities. Download the resume or reach out directly.
+      <p className="max-w-md text-center font-sans text-sm text-muted">
+        Available for software engineering opportunities. Download the résumé
+        or reach out directly.
       </p>
       <div className="flex flex-wrap items-center justify-center gap-3">
         <a
           href={`/${resumeFile.filename}`}
           download={resumeFile.filename}
-          className="inline-flex items-center gap-2 rounded-lg border border-emerald-600/30 bg-emerald-500/10 px-4 py-2 font-mono text-xs font-semibold text-emerald-700 transition-colors hover:bg-emerald-500/20 dark:border-emerald-400/30 dark:text-emerald-300"
+          className="inline-flex min-h-11 items-center gap-2 rounded-md bg-accent px-5 py-2.5 font-mono text-xs font-semibold text-[#09090b] transition-colors duration-150 hover:bg-selection"
         >
-          Download Resume
+          DOWNLOAD RÉSUMÉ
         </a>
         <a
           href={`mailto:${contact.email}`}
-          className="inline-flex items-center gap-2 rounded-lg border border-neutral-300 px-4 py-2 font-mono text-xs font-semibold text-neutral-700 transition-colors hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-900"
+          className="inline-flex min-h-11 items-center rounded-md border border-border px-5 py-2.5 font-mono text-xs text-foreground transition-colors duration-150 hover:border-muted hover:bg-panel-elevated"
         >
-          Contact Me
+          EMAIL
         </a>
         <a
           href={linkedInUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-lg border border-neutral-300 px-4 py-2 font-mono text-xs text-neutral-500 transition-colors hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-900"
+          className="inline-flex min-h-11 items-center rounded-md border border-border px-5 py-2.5 font-mono text-xs text-foreground transition-colors duration-150 hover:border-muted hover:bg-panel-elevated"
         >
-          LinkedIn
+          LINKEDIN
         </a>
       </div>
+      <p className="font-mono text-[11px] text-muted">{contact.email}</p>
     </section>
   );
 }

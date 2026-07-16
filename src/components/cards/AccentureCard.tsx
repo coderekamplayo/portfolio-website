@@ -6,33 +6,31 @@ export function AccentureCard({ className }: { className?: string }) {
 
   if (!role) return null;
 
-  return (
-    <Card label="sys.enterprise" className={className}>
-      <div className="flex h-full flex-col gap-4">
-        <div className="flex flex-col gap-1">
-          <h2 className="font-sans text-base font-semibold text-neutral-900 dark:text-neutral-50">
-            {role.role} | {role.company}
-          </h2>
-          <p className="font-mono text-[10px] text-neutral-500 dark:text-neutral-400">
-            {role.dates}
-            {role.location ? ` / ${role.location}` : ""}
-          </p>
-        </div>
+  const rows = [
+    { term: "SCOPE", value: "ABAP Open SQL / DDIC / ALV reporting" },
+    { term: "DOMAIN", value: "Enterprise ERP backend development" },
+  ];
 
-        <ul className="flex flex-col gap-2">
-          {role.bullets.map((bullet) => (
-            <li
-              key={bullet}
-              className="flex gap-2 font-mono text-xs leading-relaxed text-neutral-700 dark:text-neutral-300"
-            >
-              <span aria-hidden="true" className="text-emerald-500 dark:text-emerald-400">
-                ▹
-              </span>
-              <span>{bullet}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+  return (
+    <Card
+      label="FOUNDATION // SAP ABAP"
+      title={`${role.role} — ${role.company}`}
+      meta={role.dates}
+      className={className}
+    >
+      <p className="font-sans text-sm leading-relaxed text-muted">
+        Built enterprise backend foundations: DDIC configuration, custom ABAP
+        reports, and ALV programs over Open SQL.
+      </p>
+
+      <dl className="mt-auto flex flex-col gap-2 border-t border-border pt-4">
+        {rows.map((row) => (
+          <div key={row.term} className="flex flex-col gap-0.5">
+            <dt className="terminal-label">{row.term}</dt>
+            <dd className="font-mono text-xs text-soft">{row.value}</dd>
+          </div>
+        ))}
+      </dl>
     </Card>
   );
 }

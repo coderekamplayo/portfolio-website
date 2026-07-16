@@ -1,4 +1,4 @@
-export const SITE_URL = "https://christianderek.dev";
+export const SITE_URL = "https://christianderek.vercel.app";
 
 export interface ContactInfo {
   name: string;
@@ -14,9 +14,40 @@ export interface Experience {
   company: string;
   role: string;
   dates: string;
+  /** Short event-log category, e.g. CONTRACT, BACKEND, TRAINING. */
+  category: string;
+  /** One-sentence shipped-work summary for the event log. */
+  summary: string;
   location?: string;
   bullets: string[];
   techStack: string[];
+}
+
+export interface HeroContent {
+  overline: string;
+  heading: string;
+  supporting: string;
+  availability: string;
+  proofStrip: string[];
+}
+
+export interface Identity {
+  focus: string;
+  core: string;
+  summary: string;
+}
+
+export interface AevaTab {
+  id: "flow" | "handlers" | "integrations" | "reliability";
+  label: string;
+  points: string[];
+}
+
+export interface AevaContent {
+  title: string;
+  meta: string;
+  route: string[];
+  tabs: AevaTab[];
 }
 
 export interface AcademicExperience {
@@ -67,6 +98,9 @@ export interface ResumeFile {
 export interface ResumeData {
   contact: ContactInfo;
   summary: string;
+  hero: HeroContent;
+  identity: Identity;
+  aeva: AevaContent;
   resumeFile: ResumeFile;
   experience: Experience[];
   academicExperience: AcademicExperience[];
@@ -89,6 +123,73 @@ export const resumeData: ResumeData = {
   summary:
     "Backend development and AI-integrated systems — Node.js/TypeScript and SAP ABAP.",
 
+  hero: {
+    overline: "SOFTWARE ENGINEER // SYSTEMS, AGENTS, BACKENDS",
+    heading:
+      "I build production systems for voice AI, enterprise workflows, and modern web platforms.",
+    supporting:
+      "From AEVA's voice-agent integrations to Next.js server actions and SAP ABAP enterprise work, I build software around clarity, reliability, and measurable behavior.",
+    availability: "AVAILABLE FOR SOFTWARE ENGINEERING OPPORTUNITIES",
+    proofStrip: [
+      "TOPCIT L3",
+      "AEVA / CONCISIUM",
+      "TMG HRIS",
+      "ACCENTURE",
+      "CEB-I HACKS TOP 25",
+      "ICMFS 2025",
+    ],
+  },
+
+  identity: {
+    focus: "Voice AI systems, backend engineering, enterprise workflows",
+    core: "Node.js / TypeScript / Next.js / Prisma / SAP ABAP",
+    summary:
+      "Systems-minded engineer who migrates fragile automations into typed, server-side architectures with measurable behavior.",
+  },
+
+  aeva: {
+    title: "AEVA — AI-Powered Voice Agent Platform",
+    meta: "Concisium / Independent Contractor / January 2026 – April 2026",
+    route: ["CALLER", "VAPI", "TOOL HANDLER", "CLINIKO", "POSTMARK / NOTIFICATION"],
+    tabs: [
+      {
+        id: "flow",
+        label: "FLOW",
+        points: [
+          "Migrated 9 Make.com automation blueprints to a production Node.js/TypeScript server-side architecture.",
+          "Each live call routes through VAPI tool handlers into Cliniko scheduling and Postmark notifications.",
+        ],
+      },
+      {
+        id: "handlers",
+        label: "HANDLERS",
+        points: [
+          "High-performance VAPI tool handlers with dynamic live-call data lookup.",
+          "Appointment booking and rescheduling workflows executed in real time during calls.",
+          "Multi-location availability logic for practice scheduling.",
+        ],
+      },
+      {
+        id: "integrations",
+        label: "INTEGRATIONS",
+        points: [
+          "Deep Cliniko PMS integration: booking, rescheduling, and availability checks.",
+          "Postmark integration wrappers behind a composable email architecture.",
+          "13+ transactional email types generated from shared HTML building blocks.",
+        ],
+      },
+      {
+        id: "reliability",
+        label: "RELIABILITY",
+        points: [
+          "Replaced no-code automations that caused synchronization issues and vendor delays.",
+          "Typed TypeScript contracts across tool handlers and integration boundaries.",
+          "Composable server-side modules instead of nine disconnected blueprints.",
+        ],
+      },
+    ],
+  },
+
   resumeFile: {
     filename: "Resume_Christian_Derek_Amplayo.pdf",
     sizeLabel: "780KB",
@@ -99,6 +200,9 @@ export const resumeData: ResumeData = {
       company: "Accenture",
       role: "SAP ABAP Bootcamp Intern",
       dates: "February 2026 – May 2026",
+      category: "TRAINING",
+      summary:
+        "Completed SAP ABAP enterprise-development training covering DDIC, Open SQL, custom reports, and ALV reporting.",
       bullets: [
         "Enterprise Systems Training (SAP ABAP, ERP customization)",
         "Backend Development (ABAP reports, ABAP Open SQL)",
@@ -111,6 +215,9 @@ export const resumeData: ResumeData = {
       company: "Concisium",
       role: "Software Engineer (Independent Contractor)",
       dates: "January 2026 – April 2026",
+      category: "CONTRACT",
+      summary:
+        "Built AEVA voice-agent integrations: Cliniko scheduling handlers, VAPI tooling, and composable Postmark notification systems.",
       location: "Remote",
       bullets: [
         "Project: AEVA (AI-Powered Voice Agent Platform) — migrated 9 complex Make.com automation blueprints to a production-grade Node.js/TypeScript server-side architecture.",
@@ -131,6 +238,9 @@ export const resumeData: ResumeData = {
       company: "TMG HRIS",
       role: "Backend Developer (Project-Based)",
       dates: "January 2026 – March 2026",
+      category: "BACKEND",
+      summary:
+        "Implemented Prisma-backed attendance and leave models, Next.js Server Actions for clock-in/out, and system-aware dark mode.",
       location: "Remote",
       bullets: [
         "Database Engineering (relational database schemas with Prisma for Attendance & Leave management)",

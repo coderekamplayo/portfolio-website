@@ -4,14 +4,17 @@ import { AccentureCard } from "@/components/cards/AccentureCard";
 import { CompetitiveCard } from "@/components/cards/CompetitiveCard";
 import { AevaFlowCard } from "@/components/cards/AevaFlowCard";
 
+/* DOM order matches the mobile reading order (flagship first).
+   Desktop uses md:order-* + spans to compose the bento layout:
+   row 1: Bio (tall) / TOPCIT / Accenture — row 2: Competitive — row 3: AEVA. */
 export function BentoGrid() {
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-      <BioCard className="md:col-span-1 md:row-span-2" />
-      <TopcitCard className="md:col-span-1" />
-      <AccentureCard className="md:col-span-1" />
-      <CompetitiveCard className="md:col-span-2" />
-      <AevaFlowCard className="md:col-span-3" />
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+      <AevaFlowCard className="md:order-5 md:col-span-3" />
+      <TopcitCard className="md:order-2" />
+      <BioCard className="md:order-1 md:row-span-2" />
+      <CompetitiveCard className="md:order-4 md:col-span-2" />
+      <AccentureCard className="md:order-3" />
     </div>
   );
 }

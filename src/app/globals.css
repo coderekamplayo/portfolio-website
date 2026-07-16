@@ -5,30 +5,99 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #fafafa; /* zinc-50  */
-  --foreground: #18181b; /* zinc-900 */
-  --border: #e4e4e7; /* zinc-200 */
-  --accent: #10b981; /* emerald-500 */
+  color-scheme: light;
+
+  --background: #ffffff;
+  --foreground: #09090b;
+  --panel: #fafafa;
+  --panel-elevated: #f4f4f5;
+  --border: #d4d4d8;
+  --muted: #71717a;
+  --soft: #27272a;
+  --accent: #f97316;
+  --selection: #f27500;
 }
 
 .dark {
-  --background: #09090b; /* zinc-950 */
-  --foreground: #e4e4e7; /* zinc-200 */
-  --border: #27272a; /* zinc-800 */
-  --accent: #34d399; /* emerald-400 */
+  color-scheme: dark;
+
+  --background: #000000;
+  --foreground: #ffffff;
+  --panel: #0b0b0c;
+  --panel-elevated: #111113;
+  --border: #3f3f46;
+  --muted: #a1a1aa;
+  --soft: #d4d4d8;
+  --accent: #f97316;
+  --selection: #f27500;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-border: var(--border);
-  --color-accent: var(--accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-panel: var(--panel);
+  --color-panel-elevated: var(--panel-elevated);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-soft: var(--soft);
+  --color-accent: var(--accent);
+  --color-selection: var(--selection);
+
+  --radius-card: 1rem;
+}
+
+/* Reusable operational label: mono, tiny, uppercase, muted. */
+@utility terminal-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  line-height: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  transition: background-color 200ms ease, color 200ms ease;
+  /* Extremely subtle console grid texture; panels are opaque so it only
+     reads on the page background. */
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in oklab, var(--foreground) 3%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--foreground) 3%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 56px 56px;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+::selection {
+  background-color: var(--selection);
+  color: #ffffff;
+}
+
+:where(a, button, [role="tab"], input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

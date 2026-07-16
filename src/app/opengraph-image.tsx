@@ -14,8 +14,8 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#09090b",
-          color: "#e4e4e7",
+          backgroundColor: "#000000",
+          color: "#ffffff",
           padding: "64px",
           fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
         }}
@@ -25,8 +25,9 @@ export default function OpenGraphImage() {
             display: "flex",
             alignItems: "center",
             gap: "12px",
-            fontSize: 22,
-            color: "#34d399",
+            fontSize: 20,
+            letterSpacing: 2,
+            color: "#a1a1aa",
           }}
         >
           <div
@@ -34,27 +35,26 @@ export default function OpenGraphImage() {
               width: 12,
               height: 12,
               borderRadius: 999,
-              backgroundColor: "#10b981",
+              backgroundColor: "#f97316",
             }}
           />
-          STATUS: ACTIVE
+          SOFTWARE ENGINEER // SYSTEMS, AGENTS, BACKENDS
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <div style={{ fontSize: 56, fontWeight: 700, color: "#fafafa" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          <div style={{ fontSize: 54, fontWeight: 700, color: "#ffffff" }}>
             Christian Derek S. Amplayo
           </div>
-          <div style={{ fontSize: 28, color: "#34d399" }}>
-            ~/software-engineer
+          <div style={{ fontSize: 26, color: "#f97316" }}>
+            Voice AI systems / Backend engineering / Enterprise workflows
           </div>
-          <div style={{ fontSize: 24, color: "#a3a3a3", maxWidth: 900 }}>
-            Backend development and AI-integrated systems — Node.js/TypeScript
-            and SAP ABAP.
+          <div style={{ fontSize: 22, color: "#a1a1aa", maxWidth: 900 }}>
+            Node.js / TypeScript / Next.js / Prisma / SAP ABAP — TOPCIT Level 3
           </div>
         </div>
 
-        <div style={{ fontSize: 20, color: "#737373" }}>
-          christianderek.dev
+        <div style={{ fontSize: 20, color: "#71717a" }}>
+          christianderek.vercel.app
         </div>
       </div>
     ),

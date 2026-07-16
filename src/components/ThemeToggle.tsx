@@ -4,7 +4,7 @@ import { useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 
 const FRAME =
-  "inline-flex min-w-[15ch] items-center justify-center rounded border border-neutral-300 px-2.5 py-1 text-xs font-mono transition hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-900";
+  "inline-flex min-h-11 min-w-[15ch] items-center justify-center rounded-md border border-border px-2.5 py-1 text-xs font-mono text-muted transition-colors duration-150 hover:border-muted hover:text-foreground";
 
 function subscribe() {
   return () => {};

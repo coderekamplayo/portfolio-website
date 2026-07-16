@@ -1,47 +1,71 @@
 import { resumeData } from "@/data/resume";
 
+interface LogEvent {
+  dates: string;
+  category: string;
+  org: string;
+  role: string;
+  summary: string;
+  tech?: string[];
+}
+
 export function LinearTimeline() {
-  const { experience } = resumeData;
+  const { experience, education } = resumeData;
+
+  const events: LogEvent[] = [
+    ...experience.map((item) => ({
+      dates: item.dates,
+      category: item.category,
+      org: item.company,
+      role: item.role,
+      summary: item.summary,
+      tech: item.techStack,
+    })),
+    ...education.map((entry) => ({
+      dates: entry.dates,
+      category: "EDUCATION",
+      org: entry.institution,
+      role: entry.degree,
+      summary: entry.location,
+    })),
+  ];
 
   return (
-    <section id="timeline" className="space-y-6">
-      <h2 className="font-mono text-xl font-bold tracking-tight text-neutral-950 dark:text-neutral-50">
-        /experience-timeline
+    <section id="timeline" aria-labelledby="timeline-heading" className="flex flex-col gap-8">
+      <h2
+        id="timeline-heading"
+        className="font-mono text-sm font-semibold uppercase tracking-[0.16em] text-foreground"
+      >
+        EVENT LOG <span className="text-muted">{"//"}</span> EXPERIENCE
       </h2>
 
-      <ol className="ml-4 space-y-10 border-l border-neutral-200 dark:border-neutral-800">
-        {experience.map((item) => (
-          <li key={`${item.company}-${item.role}`} className="relative pl-6">
+      <ol className="ml-1 flex flex-col gap-10 border-l border-border">
+        {events.map((event) => (
+          <li key={`${event.org}-${event.role}`} className="relative pl-6">
             <span
               aria-hidden="true"
-              className="absolute left-[-5px] top-1.5 h-2 w-2 rounded-full bg-emerald-500 ring-4 ring-neutral-50 dark:bg-emerald-400 dark:ring-neutral-950"
+              className="absolute left-[-3.5px] top-1.5 h-1.5 w-1.5 bg-accent"
             />
 
-            <div className="flex flex-col gap-2">
-              <h3 className="font-sans text-base font-semibold text-neutral-900 dark:text-neutral-50">
-                {item.role}
-              </h3>
-              <p className="font-mono text-xs text-neutral-500 dark:text-neutral-400">
-                {item.company} / {item.dates}
-                {item.location ? ` / ${item.location}` : ""}
+            <div className="flex flex-col gap-1.5">
+              <p className="font-mono text-[11px] tabular-nums text-muted">
+                [{event.dates}]
               </p>
-
-              <ul className="mt-1 list-disc space-y-1 pl-4 font-sans text-sm leading-relaxed text-neutral-700 marker:text-emerald-500 dark:text-neutral-300 dark:marker:text-emerald-400">
-                {item.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ))}
-              </ul>
-
-              <ul className="mt-2 flex flex-wrap gap-1.5">
-                {item.techStack.map((tech) => (
-                  <li
-                    key={tech}
-                    className="rounded border border-neutral-200 bg-neutral-100/30 px-1.5 py-0.5 font-mono text-[10px] text-neutral-500 dark:border-neutral-800 dark:bg-neutral-900/30"
-                  >
-                    {tech}
-                  </li>
-                ))}
-              </ul>
+              <p className="font-mono text-xs font-semibold uppercase tracking-wider text-foreground">
+                {event.category} <span className="text-muted">{"//"}</span>{" "}
+                {event.org}
+              </p>
+              <h3 className="font-sans text-sm font-medium text-soft">
+                {event.role}
+              </h3>
+              <p className="max-w-2xl font-sans text-sm leading-relaxed text-muted">
+                {event.summary}
+              </p>
+              {event.tech ? (
+                <p className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                  {event.tech.join(" · ")}
+                </p>
+              ) : null}
             </div>
           </li>
         ))}
