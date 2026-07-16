@@ -54,7 +54,7 @@ function RouteGraph({
 }) {
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col items-stretch lg:flex-row lg:items-stretch">
+      <div className="flex flex-col items-stretch lg:flex-row lg:items-stretch lg:justify-center">
         {route.map((node, i) => (
           <Fragment key={node.id}>
             <div
