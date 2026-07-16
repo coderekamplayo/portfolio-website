@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { resumeData } from "@/data/resume";
 import { StatusDot } from "@/components/ui/StatusDot";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -17,36 +16,13 @@ export function Hero() {
         <ThemeToggle />
       </div>
 
-      <div className="grid items-center gap-8 md:grid-cols-[240px_1fr] lg:grid-cols-[280px_1fr]">
-        <div className="flex flex-col gap-4 md:order-2">
-          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
-            {hero.overline}
-          </p>
-          <h1 className="max-w-3xl font-sans text-3xl font-bold leading-tight tracking-tight text-foreground md:text-5xl">
-            {hero.heading}
-          </h1>
-        </div>
-
-        {contact.photo ? (
-          <figure className="hidden flex-col gap-2 md:order-1 md:flex">
-            <div className="overflow-hidden rounded-card border border-border bg-panel">
-              <Image
-                src={contact.photo}
-                alt={`Portrait of ${contact.name}`}
-                width={560}
-                height={560}
-                priority
-                className="aspect-square h-auto w-full object-cover grayscale"
-              />
-            </div>
-            <figcaption className="terminal-label text-right">
-              OPERATOR {"//"} {contact.title}
-            </figcaption>
-          </figure>
-        ) : null}
-      </div>
-
       <div className="flex flex-col gap-4">
+        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+          {hero.overline}
+        </p>
+        <h1 className="max-w-3xl font-sans text-3xl font-bold leading-tight tracking-tight text-foreground md:text-5xl">
+          {hero.heading}
+        </h1>
         <p className="max-w-2xl font-sans text-sm leading-relaxed text-muted md:text-base">
           {hero.supporting}
         </p>
