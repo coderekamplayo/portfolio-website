@@ -21,7 +21,8 @@ export function Hero() {
           {hero.overline}
         </p>
         <h1 className="max-w-3xl font-sans text-3xl font-bold leading-tight tracking-tight text-foreground md:text-5xl">
-          {hero.heading}
+          {hero.heading}{" "}
+          <span className="text-muted">{hero.headingMuted}</span>
         </h1>
         <p className="max-w-2xl font-sans text-sm leading-relaxed text-muted md:text-base">
           {hero.supporting}

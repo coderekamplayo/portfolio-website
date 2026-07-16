@@ -26,6 +26,8 @@ export interface Experience {
 export interface HeroContent {
   overline: string;
   heading: string;
+  /** Rendered after `heading` in a muted gray, like a two-tone headline. */
+  headingMuted: string;
   supporting: string;
   availability: string;
   proofStrip: string[];
@@ -125,8 +127,9 @@ export const resumeData: ResumeData = {
 
   hero: {
     overline: "SOFTWARE ENGINEER // SYSTEMS, AGENTS, BACKENDS",
-    heading:
-      "I build production systems for voice AI, enterprise workflows, and modern web platforms.",
+    heading: "I build production systems",
+    headingMuted:
+      "for voice AI, enterprise workflows, and modern web platforms.",
     supporting:
       "From AEVA's voice-agent integrations to Next.js server actions and SAP ABAP enterprise work, I build software around clarity, reliability, and measurable behavior.",
     availability: "AVAILABLE FOR SOFTWARE ENGINEERING OPPORTUNITIES",
