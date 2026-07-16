@@ -1,5 +1,6 @@
 import { Hero } from "@/components/Hero";
 import { BentoGrid } from "@/components/BentoGrid";
+import { StackSection } from "@/components/StackSection";
 import { LinearTimeline } from "@/components/LinearTimeline";
 import { FooterCta } from "@/components/FooterCta";
 import { jsonLd } from "@/data/jsonld";
@@ -18,6 +19,7 @@ export default function Home() {
       <div className="mx-auto max-w-6xl space-y-16 px-4 py-12 md:space-y-20 md:py-20">
         <Hero />
         <BentoGrid />
+        <StackSection />
         <LinearTimeline />
         <FooterCta />
 
