@@ -42,7 +42,7 @@ export function Hero() {
                 width={560}
                 height={560}
                 priority
-                className="aspect-square h-auto w-full object-cover grayscale"
+                className="aspect-square h-auto w-full object-cover"
               />
             </div>
             <figcaption className="terminal-label text-right">

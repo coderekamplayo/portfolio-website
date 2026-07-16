@@ -120,7 +120,7 @@ export const resumeData: ResumeData = {
     phone: "09499881224",
     location: "Sta. Ana, City of Manila, Philippines",
     linkedIn: "linkedin.com/in/christian-derek-amplayo",
-    photo: "/profile.jpg",
+    photo: "/profile.png",
   },
 
   summary:
