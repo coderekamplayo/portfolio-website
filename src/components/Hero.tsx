@@ -11,7 +11,7 @@ export function Hero() {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="inline-flex items-center gap-2.5 rounded-md border border-border px-3 py-2">
           <StatusDot />
-          <span className="terminal-label">{hero.availability}</span>
+          <span className="status-blink terminal-label">{hero.availability}</span>
         </div>
         <ThemeToggle />
       </div>

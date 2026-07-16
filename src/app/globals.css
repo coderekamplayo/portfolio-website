@@ -16,6 +16,7 @@
   --soft: #27272a;
   --accent: #f97316;
   --selection: #f27500;
+  --grid-line: color-mix(in oklab, var(--foreground) 3%, transparent);
 }
 
 .dark {
@@ -30,6 +31,7 @@
   --soft: #d4d4d8;
   --accent: #f97316;
   --selection: #f27500;
+  --grid-line: color-mix(in oklab, var(--foreground) 8%, transparent);
 }
 
 @theme inline {
@@ -65,16 +67,8 @@ body {
   /* Extremely subtle console grid texture; panels are opaque so it only
      reads on the page background. */
   background-image:
-    linear-gradient(
-      to right,
-      color-mix(in oklab, var(--foreground) 3%, transparent) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      color-mix(in oklab, var(--foreground) 3%, transparent) 1px,
-      transparent 1px
-    );
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 56px 56px;
   transition:
     background-color 200ms ease,
@@ -89,6 +83,16 @@ body {
 :where(a, button, [role="tab"], input, select, textarea, summary):focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+@keyframes status-blink {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.status-blink {
+  animation: status-blink 1.6s ease-in-out infinite;
 }
 
 @keyframes proof-marquee {
@@ -119,5 +123,12 @@ body {
 
   .proof-marquee-track {
     animation: none;
+  }
+
+  /* Deliberate exemption: a gentle opacity pulse on the availability status,
+     kept even under reduced motion (no movement, low contrast change). */
+  .status-blink {
+    animation-duration: 1.6s !important;
+    animation-iteration-count: infinite !important;
   }
 }
